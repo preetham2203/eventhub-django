@@ -79,6 +79,28 @@ A complete Django web application for event management with user authentication,
 
 6\. \*\*Management\*\* - Organizers can manage their events
 
+## 📸 Screenshots
+
+### Home Page (Before Login)
+![Home Page Before Login](images/homess.png)
+*Welcome page with login/register options - beautiful background design*
+
+### Dashboard (After Login) 
+![Dashboard After Login](images/afterloginss.png)
+*User dashboard with navigation to all features after successful login*
+
+### All Events
+![All Events Page](images/alleventss.png)
+*Browse all available events with search and category filters*
+
+### My Events
+![My Events Page](images/mylistss.png)
+*Manage events you're attending and events you're hosting*
+
+### Create Event
+![Create Event Page](images/createss.png)
+*Form to create new events with image uploads and details*
+
 
 
 \## 🔧 Technical Highlights
