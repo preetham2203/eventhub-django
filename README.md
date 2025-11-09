@@ -1,3 +1,26 @@
+# 🎪 EventHub - Event Management System
+
+A complete Django web application for event management with user authentication, event registration, and image uploads.
+
+## 🚀 Features
+
+- **👤 User Authentication** - Register, Login, Logout
+- **🎯 Event Management** - Create, Read, Update, Delete events
+- **📅 Event Registration** - Register/unregister for events
+- **🖼️ Image Uploads** - Event images with media storage
+- **📱 Responsive Design** - Bootstrap-powered UI
+- **📞 Contact System** - Contact form with success pages
+- **👥 Capacity Management** - Event attendance tracking
+
+## 🛠️ Tech Stack
+
+- **Backend**: Django 5.2.7
+- **Frontend**: Bootstrap 5, HTML5, CSS3
+- **Database**: SQLite3
+- **File Storage**: Django Media Files
+- **Authentication**: Django Auth System
+
+## 📁 Project Structure
 
 
 \## 🎯 Key Functionality
