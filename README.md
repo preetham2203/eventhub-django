@@ -107,19 +107,30 @@ GitHub: \[preetham2203](https://github.com/preetham2203)
 
 
 
-\## ⚠️ Project Notice
+## ⚠️ LEGAL NOTICE
 
+**COPYRIGHT PROTECTED - ALL RIGHTS RESERVED**
 
+This project and all associated code are the intellectual property of Preetham. 
+This repository is provided **FOR PORTFOLIO AND REVIEW PURPOSES ONLY**.
 
-This project is a \*\*portfolio demonstration\*\* showcasing full-stack Django development skills. The code is provided for \*\*review purposes only\*\*.
+### 🔒 STRICTLY PROHIBITED:
+- ❌ Commercial use
+- ❌ Distribution or modification  
+- ❌ Production deployment
+- ❌ Claiming authorship
 
+### ✅ PERMITTED USE:
+- ✅ Review by potential employers
+- ✅ Educational evaluation
+- ✅ Recruitment assessment
 
+**Unauthorized use will result in legal action.**
+
+See [LICENSE](LICENSE) for complete terms and conditions.
 
 ---
 
-
-
-\*\*🔒 Code Protection Notice\*\*  
-
-\*This project's source code is the intellectual property of the developer. Unauthorized use, reproduction, or distribution is prohibited.\*
-
+**Developer:** Preetham  
+**GitHub:** [preetham2203](https://github.com/preetham2203)  
+**Status:** Copyright Protected - Portfolio Display
