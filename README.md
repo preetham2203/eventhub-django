@@ -1,3 +1,26 @@
+# 🎪 EventHub - Event Management System
+
+A complete Django web application for event management with user authentication, event registration, and image uploads.
+
+## 🚀 Features
+
+- **👤 User Authentication** - Register, Login, Logout
+- **🎯 Event Management** - Create, Read, Update, Delete events
+- **📅 Event Registration** - Register/unregister for events
+- **🖼️ Image Uploads** - Event images with media storage
+- **📱 Responsive Design** - Bootstrap-powered UI
+- **📞 Contact System** - Contact form with success pages
+- **👥 Capacity Management** - Event attendance tracking
+
+## 🛠️ Tech Stack
+
+- **Backend**: Django 5.2.7
+- **Frontend**: Bootstrap 5, HTML5, CSS3
+- **Database**: SQLite3
+- **File Storage**: Django Media Files
+- **Authentication**: Django Auth System
+
+## 📁 Project Structure
 
 
 \## 🎯 Key Functionality
@@ -84,19 +107,30 @@ GitHub: \[preetham2203](https://github.com/preetham2203)
 
 
 
-\## ⚠️ Project Notice
+## ⚠️ LEGAL NOTICE
 
+**COPYRIGHT PROTECTED - ALL RIGHTS RESERVED**
 
+This project and all associated code are the intellectual property of Preetham. 
+This repository is provided **FOR PORTFOLIO AND REVIEW PURPOSES ONLY**.
 
-This project is a \*\*portfolio demonstration\*\* showcasing full-stack Django development skills. The code is provided for \*\*review purposes only\*\*.
+### 🔒 STRICTLY PROHIBITED:
+- ❌ Commercial use
+- ❌ Distribution or modification  
+- ❌ Production deployment
+- ❌ Claiming authorship
 
+### ✅ PERMITTED USE:
+- ✅ Review by potential employers
+- ✅ Educational evaluation
+- ✅ Recruitment assessment
 
+**Unauthorized use will result in legal action.**
+
+See [LICENSE](LICENSE) for complete terms and conditions.
 
 ---
 
-
-
-\*\*🔒 Code Protection Notice\*\*  
-
-\*This project's source code is the intellectual property of the developer. Unauthorized use, reproduction, or distribution is prohibited.\*
-
+**Developer:** Preetham  
+**GitHub:** [preetham2203](https://github.com/preetham2203)  
+**Status:** Copyright Protected - Portfolio Display
