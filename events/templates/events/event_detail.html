@@ -1,0 +1,60 @@
+{% extends "model/base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card glass-card">
+      {% if event.image %}
+        <img src="{{ event.image.url }}" class="card-img-top" alt="{{ event.title }}" style="height: 300px; object-fit: cover;">
+      {% else %}
+        <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+          <span class="text-muted fs-1">🎯</span>
+        </div>
+      {% endif %}
+      
+      <div class="card-body">
+        <h1 class="card-title">{{ event.title }}</h1>
+        
+        <div class="row mt-4">
+          <div class="col-md-6">
+            <p><strong>📅 Date & Time:</strong><br>{{ event.date|date:"F d, Y - H:i" }}</p>
+            <p><strong>📍 Location:</strong><br>{{ event.location }}</p>
+          </div>
+          <div class="col-md-6">
+            <p><strong>🏷️ Category:</strong><br>{{ event.category }}</p>
+            <p><strong>👤 Organizer:</strong><br>{{ event.organizer.username }}</p>
+            <p><strong>👥 Attendance:</strong><br>{{ event.registered_count }}/{{ event.max_attendees }} registered</p>
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <h5>Description</h5>
+          <p class="card-text">{{ event.description|linebreaks }}</p>
+        </div>
+
+        <div class="mt-4 d-flex gap-2 flex-wrap">
+          {% if user.is_authenticated %}
+            {% if user == event.organizer %}
+              <a href="{% url 'event-edit' event.pk %}" class="btn btn-warning">✏️ Edit Event</a>
+              <a href="{% url 'event-delete' event.pk %}" class="btn btn-danger">🗑️ Delete</a>
+            {% else %}
+              {% if is_registered %}
+                <a href="{% url 'event-unregister' event.pk %}" class="btn btn-danger">❌ Unregister</a>
+                <span class="btn btn-success">✅ You're Registered!</span>
+              {% else %}
+                {% if event.spots_available > 0 %}
+                  <a href="{% url 'event-register' event.pk %}" class="btn btn-success">🎟️ Register for Event</a>
+                {% else %}
+                  <span class="btn btn-secondary">😔 Event Full</span>
+                {% endif %}
+              {% endif %}
+            {% endif %}
+          {% else %}
+            <a href="{% url 'login' %}" class="btn btn-primary">🔐 Login to Register</a>
+          {% endif %}
+          <a href="{% url 'event-list' %}" class="btn btn-secondary">← Back to Events</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

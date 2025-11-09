@@ -1,0 +1,65 @@
+{% extends "model/base.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-md-6">
+    <div class="card mb-4 glass-card">
+      <div class="card-header bg-success text-white">
+        <h4 class="mb-0">✅ Events I'm Attending</h4>
+      </div>
+      <div class="card-body">
+        {% if registered_events %}
+          {% for event in registered_events %}
+            <div class="card mb-3">
+              <div class="card-body">
+                <h5 class="card-title">{{ event.title }}</h5>
+                <p class="card-text">
+                  📅 {{ event.date|date:"M d, Y" }}<br>
+                  📍 {{ event.location }}
+                </p>
+                <div class="d-flex gap-2">
+                  <a href="{% url 'event-detail' event.pk %}" class="btn btn-sm btn-primary">View</a>
+                  <a href="{% url 'event-unregister' event.pk %}" class="btn btn-sm btn-danger">Unregister</a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <p class="text-muted">You haven't registered for any events yet.</p>
+          <a href="{% url 'event-list' %}" class="btn btn-primary">Browse Events</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card glass-card">
+      <div class="card-header bg-warning text-dark">
+        <h4 class="mb-0">🎯 Events I'm Organizing</h4>
+      </div>
+      <div class="card-body">
+        {% if organized_events %}
+          {% for event in organized_events %}
+            <div class="card mb-3">
+              <div class="card-body">
+                <h5 class="card-title">{{ event.title }}</h5>
+                <p class="card-text">
+                  📅 {{ event.date|date:"M d, Y" }}<br>
+                  📍 {{ event.location }}<br>
+                  👥 {{ event.registered_count }}/{{ event.max_attendees }} attendees
+                </p>
+                <div class="d-flex gap-2">
+                  <a href="{% url 'event-detail' event.pk %}" class="btn btn-sm btn-primary">View</a>
+                  <a href="{% url 'event-edit' event.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <p class="text-muted">You haven't created any events yet.</p>
+          <a href="{% url 'event-add' %}" class="btn btn-success">Create Your First Event</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

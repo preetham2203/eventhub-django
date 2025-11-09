@@ -1,0 +1,32 @@
+{% extends 'model/base.html' %}
+
+{% block content %}
+<style>
+    body {
+        background-image: url("/static/model/images/party1.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        min-height: 100vh;
+    }
+   
+</style>
+<div class="text-center text-white mb-5">
+    <h1 class="display-4 fw-bold mb-4" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">🎉 Welcome to EventHub</h1>
+    <p class="lead">Discover amazing events happening around you!</p>
+    
+    {% if user.is_authenticated %}
+        <div class="d-flex justify-content-center gap-3 mt-4">
+            <a href="{% url 'event-list' %}" class="btn btn-primary btn-lg">📅 Browse Events</a>
+            <a href="{% url 'event-add' %}" class="btn btn-success btn-lg">➕ Create Event</a>
+            <a href="{% url 'my-events' %}" class="btn btn-warning btn-lg">👤 My Events</a>
+        </div>
+    {% else %}
+        <div class="d-flex justify-content-center gap-3 mt-4">
+            <a href="{% url 'login' %}" class="btn btn-primary btn-lg">🔐 Login</a>
+            <a href="{% url 'register' %}" class="btn btn-success btn-lg">📝 Register</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

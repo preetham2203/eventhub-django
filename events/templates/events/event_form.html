@@ -1,0 +1,61 @@
+{% extends "model/base.html" %}
+{% block content %}
+<style>
+  body {
+    background-image: url("/static/model/images/party2.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+  
+  .glass-card {
+    background-color: rgba(255, 255, 255, 0.8);
+    
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+</style>
+
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card glass-card">
+      <div class="card-header">
+        <h2 class="mb-0">
+          {% if object %}✏️ Edit Event{% else %}➕ Create New Event{% endif %}
+        </h2>
+      </div>
+      <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          
+          {% for field in form %}
+            <div class="mb-3">
+              <label class="form-label"><strong>{{ field.label }}</strong></label>
+              {{ field }}
+              {% if field.help_text %}
+                <div class="form-text">{{ field.help_text }}</div>
+              {% endif %}
+              {% if field.errors %}
+                <div class="text-danger">
+                  {% for error in field.errors %}
+                    {{ error }}
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+          {% endfor %}
+
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-success">
+              {% if object %}💾 Update Event{% else %}🚀 Create Event{% endif %}
+            </button>
+            <a href="{% if object %}{% url 'event-detail' object.pk %}{% else %}{% url 'event-list' %}{% endif %}" 
+               class="btn btn-secondary">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

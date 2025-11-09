@@ -1,0 +1,48 @@
+{% extends 'model/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card glass-card">
+            <div class="card-body">
+                <h2 class="text-center mb-4">🛠️ Our Services</h2>
+                
+                <div class="row text-center">
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3>🎪</h3>
+                                <h5>Event Creation</h5>
+                                <p>Create and manage your events with ease</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3>📅</h3>
+                                <h5>Event Discovery</h5>
+                                <p>Find amazing events happening around you</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3>👥</h3>
+                                <h5>Registration</h5>
+                                <p>Easy registration and attendance tracking</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <a href="{% url 'event-list' %}" class="btn btn-primary">Explore Events</a>
+                    <a href="{% url 'contact' %}" class="btn btn-success">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

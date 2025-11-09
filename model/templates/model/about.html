@@ -1,0 +1,43 @@
+{% extends 'model/base.html' %}
+
+{% block content %}
+
+<style>
+    body {
+    background-image: url("/static/model/images/party4.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+</style>
+
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card glass-card">
+            <div class="card-body">
+                <h2 class="text-center mb-4">ℹ️ About EventHub</h2>
+                <p>Welcome to EventHub - your ultimate event management platform! 🎉</p>
+                
+                <h5>🌟 What We Offer:</h5>
+                <ul>
+                    <li>🎯 Create and manage events</li>
+                    <li>📅 Browse upcoming events</li>
+                    <li>👥 Register for events</li>
+                    <li>📊 Track event attendance</li>
+                </ul>
+
+                <h5>🚀 Our Mission:</h5>
+                <p>To connect people through amazing events and create memorable experiences.</p>
+
+                <div class="text-center mt-4">
+                    <a href="{% url 'event-list' %}" class="btn btn-primary">📅 Browse Events</a>
+                    <a href="{% url 'home' %}" class="btn btn-secondary">🏠 Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
