@@ -25,8 +25,7 @@ SECRET_KEY = 'django-insecure-8$-on-l9^ooz)k*y3m@8#*_=9+g&g^xo$$u0o8ha_c18&rux&c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -80,6 +79,22 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# Railway deployment settings
+import os
+if 'RAILWAY' in os.environ:
+    # Production settings
+    DEBUG = False
+    # Static files setup for production
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    
+    # Use PostgreSQL database if available
+    import dj_database_url
+    if 'DATABASE_URL' in os.environ:
+        DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+else:
+    # Development settings
+    DEBUG = True
 
 
 # Password validation
