@@ -38,7 +38,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'events',
     'model',
+    'rest_framework',          
+    'rest_framework.authtoken', 
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -81,20 +93,20 @@ DATABASES = {
 }
 
 # Railway deployment settings
-import os
-if 'RAILWAY' in os.environ:
-    # Production settings
-    DEBUG = False
-    # Static files setup for production
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# import os
+# if 'RAILWAY' in os.environ:
+#     # Production settings
+#     DEBUG = False
+#     # Static files setup for production
+#     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     
-    # Use PostgreSQL database if available
-    import dj_database_url
-    if 'DATABASE_URL' in os.environ:
-        DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-else:
-    # Development settings
-    DEBUG = True
+#     # Use PostgreSQL database if available
+#     import dj_database_url
+#     if 'DATABASE_URL' in os.environ:
+#         DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+# else:
+#     # Development settings
+#     DEBUG = True
 
 
 # Password validation
