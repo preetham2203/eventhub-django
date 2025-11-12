@@ -1,65 +1,242 @@
 {% extends "model/base.html" %}
 {% block content %}
-<div class="row">
-  <div class="col-md-6">
-    <div class="card mb-4 glass-card">
-      <div class="card-header bg-success text-white">
-        <h4 class="mb-0">✅ Events I'm Attending</h4>
-      </div>
-      <div class="card-body">
-        {% if registered_events %}
-          {% for event in registered_events %}
-            <div class="card mb-3">
-              <div class="card-body">
-                <h5 class="card-title">{{ event.title }}</h5>
-                <p class="card-text">
-                  📅 {{ event.date|date:"M d, Y" }}<br>
-                  📍 {{ event.location }}
-                </p>
-                <div class="d-flex gap-2">
-                  <a href="{% url 'event-detail' event.pk %}" class="btn btn-sm btn-primary">View</a>
-                  <a href="{% url 'event-unregister' event.pk %}" class="btn btn-sm btn-danger">Unregister</a>
-                </div>
-              </div>
-            </div>
-          {% endfor %}
-        {% else %}
-          <p class="text-muted">You haven't registered for any events yet.</p>
-          <a href="{% url 'event-list' %}" class="btn btn-primary">Browse Events</a>
-        {% endif %}
-      </div>
-    </div>
-  </div>
+<style>
+    .events-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .event-section {
+        margin-bottom: 2rem;
+    }
+    
+    .event-card {
+        margin-bottom: 1rem;
+        transition: transform 0.2s ease;
+    }
+    
+    .event-card:hover {
+        transform: translateY(-2px);
+    }
+    
+    .event-actions {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+    
+    .event-actions .btn {
+        flex: 1;
+        min-width: 80px;
+        text-align: center;
+    }
+    
+    .section-header {
+        border-radius: 10px 10px 0 0;
+        padding: 1rem;
+    }
+    
+    .empty-state {
+        text-align: center;
+        padding: 2rem 1rem;
+    }
+    
+    /* Mobile responsive improvements */
+    @media (max-width: 992px) {
+        .events-container {
+            gap: 1.5rem;
+        }
+        
+        .event-actions .btn {
+            min-width: 70px;
+            font-size: 0.85rem;
+            padding: 0.4rem 0.6rem;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .events-container {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .event-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-header h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0;
+        }
+        
+        .event-card .card-body {
+            padding: 1rem;
+        }
+        
+        .event-actions {
+            gap: 0.4rem;
+        }
+        
+        .event-actions .btn {
+            min-width: 90px;
+            font-size: 0.9rem;
+            padding: 0.5rem 0.8rem;
+        }
+        
+        .empty-state {
+            padding: 1.5rem 1rem;
+        }
+        
+        .empty-state .btn {
+            width: 100%;
+            max-width: 200px;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .events-container {
+            gap: 1rem;
+        }
+        
+        .event-section {
+            margin-bottom: 1rem;
+        }
+        
+        .section-header {
+            padding: 0.8rem;
+        }
+        
+        .section-header h4 {
+            font-size: 1rem;
+        }
+        
+        .event-card {
+            margin-bottom: 0.8rem;
+        }
+        
+        .event-card .card-body {
+            padding: 0.8rem;
+        }
+        
+        .event-card .card-title {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .event-card .card-text {
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .event-actions {
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+        
+        .event-actions .btn {
+            min-width: 100%;
+            margin-bottom: 0.3rem;
+            text-align: center;
+        }
+        
+        .empty-state {
+            padding: 1rem 0.5rem;
+        }
+        
+        .empty-state p {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+    }
+    
+    @media (max-width: 400px) {
+        .section-header h4 {
+            font-size: 0.95rem;
+        }
+        
+        .event-card .card-title {
+            font-size: 0.95rem;
+        }
+        
+        .event-card .card-text {
+            font-size: 0.85rem;
+        }
+        
+        .event-actions .btn {
+            font-size: 0.85rem;
+            padding: 0.4rem 0.6rem;
+        }
+    }
+</style>
 
-  <div class="col-md-6">
-    <div class="card glass-card">
-      <div class="card-header bg-warning text-dark">
-        <h4 class="mb-0">🎯 Events I'm Organizing</h4>
-      </div>
-      <div class="card-body">
-        {% if organized_events %}
-          {% for event in organized_events %}
-            <div class="card mb-3">
-              <div class="card-body">
-                <h5 class="card-title">{{ event.title }}</h5>
-                <p class="card-text">
-                  📅 {{ event.date|date:"M d, Y" }}<br>
-                  📍 {{ event.location }}<br>
-                  👥 {{ event.registered_count }}/{{ event.max_attendees }} attendees
-                </p>
-                <div class="d-flex gap-2">
-                  <a href="{% url 'event-detail' event.pk %}" class="btn btn-sm btn-primary">View</a>
-                  <a href="{% url 'event-edit' event.pk %}" class="btn btn-sm btn-warning">Edit</a>
-                </div>
-              </div>
+<div class="events-container">
+    <!-- Events I'm Attending -->
+    <div class="event-section">
+        <div class="card glass-card">
+            <div class="card-header bg-success text-white section-header">
+                <h4 class="mb-0">✅ Events I'm Attending</h4>
             </div>
-          {% endfor %}
-        {% else %}
-          <p class="text-muted">You haven't created any events yet.</p>
-          <a href="{% url 'event-add' %}" class="btn btn-success">Create Your First Event</a>
-        {% endif %}
-      </div>
+            <div class="card-body">
+                {% if registered_events %}
+                    {% for event in registered_events %}
+                        <div class="card event-card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ event.title }}</h5>
+                                <p class="card-text">
+                                    📅 {{ event.date|date:"M d, Y" }}<br>
+                                    📍 {{ event.location }}
+                                </p>
+                                <div class="event-actions">
+                                    <a href="{% url 'event-detail' event.pk %}" class="btn btn-sm btn-primary">View</a>
+                                    <a href="{% url 'event-unregister' event.pk %}" class="btn btn-sm btn-danger">Unregister</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="empty-state">
+                        <p class="text-muted">You haven't registered for any events yet.</p>
+                        <a href="{% url 'event-list' %}" class="btn btn-primary">Browse Events</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
     </div>
-  </div>
+
+    <!-- Events I'm Organizing -->
+    <div class="event-section">
+        <div class="card glass-card">
+            <div class="card-header bg-warning text-dark section-header">
+                <h4 class="mb-0">🎯 Events I'm Organizing</h4>
+            </div>
+            <div class="card-body">
+                {% if organized_events %}
+                    {% for event in organized_events %}
+                        <div class="card event-card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ event.title }}</h5>
+                                <p class="card-text">
+                                    📅 {{ event.date|date:"M d, Y" }}<br>
+                                    📍 {{ event.location }}<br>
+                                    👥 {{ event.registered_count }}/{{ event.max_attendees }} attendees
+                                </p>
+                                <div class="event-actions">
+                                    <a href="{% url 'event-detail' event.pk %}" class="btn btn-sm btn-primary">View</a>
+                                    <a href="{% url 'event-edit' event.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="empty-state">
+                        <p class="text-muted">You haven't created any events yet.</p>
+                        <a href="{% url 'event-add' %}" class="btn btn-success">Create Your First Event</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
